@@ -1,0 +1,12 @@
+﻿@using Movie.Data.ViewModels;
+
+@model ShoppingCartVM
+
+<li>
+    <a class="nav-link text-dark" asp-controller="ShoppingCart">
+        <span class="bi bi-cart"></span>
+        <span id="cart-status">
+            @Model.ShoppingCart.ShoppingCartItems.Count
+        </span>
+    </a>
+</li>

@@ -1,0 +1,47 @@
+﻿@model Movie.Data.ViewModels.ShoppingCartVM
+
+<h2>Your shopping cart</h2>
+<h4>There are the Movies-Tickets in your shopping cart.</h4>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Selected amount</th>
+            <th>Pie</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+        {
+            <tr>
+                <td class="text-center">@line.Amount</td>
+                <td class="text-left">@line.Movie.Name</td>
+                <td class="text-right">@line.Movie.Price.ToString("c")</td>
+                <td class="text-right">
+                    @((line.Amount * line.Movie.Price).ToString("c"))
+                </td>
+                <td class="text-right" >
+                    <div class="text-center">
+                        <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-id="@line.Movie.Id">Remove item !</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">
+                @Model.ShoppingCartTotal.ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<span class="text-center">
+    <a class="btn btn-primary"asp-controller="Movies" > Back To Movies List !</a>
+</span>
+<span class="text-center">
+    <a class="btn btn-primary" asp-action="CheckOut" asp-controller="Order"> CheckOut !</a>
+</span>
